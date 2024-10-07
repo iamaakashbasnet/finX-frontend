@@ -1,3 +1,9 @@
+# IDE configs
+.vscode
+.vscode/*
+!.vscode/extensions.json
+.idea
+
 # Logs
 logs
 *.log
