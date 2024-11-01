@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+/* For light mode */
+:root[data-mantine-color-scheme='light'] body {
+  --mantine-color-body: var(--mantine-color-gray-1);
+}
+
+/* For dark mode */
+:root[data-mantine-color-scheme='dark'] body {
+  --mantine-color-body: var(--mantine-color-dark-9);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -8,29 +18,4 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Open Sans',
-    'Helvetica Neue',
-    sans-serif;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-h1 {
-  font-weight: 400;
 }
