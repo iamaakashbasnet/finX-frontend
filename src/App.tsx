@@ -1,9 +1,9 @@
+import { RouterProvider } from 'react-router-dom';
+
+import router from 'routers/router';
+
 const App = () => {
-  return (
-    <>
-      <h1>finX</h1>
-    </>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
