@@ -13,3 +13,5 @@ $ npm i
 
 ## Used Techs
 - ReactJS (TypeScript)
+- MantineUI
+- React Router
