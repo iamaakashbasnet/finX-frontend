@@ -11,8 +11,8 @@ export default function FinxSteps() {
       <Grid gutter={40}>
         <Grid.Col span={{ base: 12, md: 6 }}>
           <Center>
-            <Timeline active={1} bulletSize={24} lineWidth={2}>
-              <Timeline.Item bullet={<PiHandshakeDuotone size={12} />} title="Meet">
+            <Timeline active={1} bulletSize={40} lineWidth={3}>
+              <Timeline.Item bullet={<PiHandshakeDuotone size={25} />} title="Meet">
                 <Text c="dimmed" size="sm">
                   Contact us with your requirements
                 </Text>
@@ -21,7 +21,7 @@ export default function FinxSteps() {
                 </Text>
               </Timeline.Item>
 
-              <Timeline.Item bullet={<TbWorldWww size={12} />} title="Platform Creation">
+              <Timeline.Item bullet={<TbWorldWww size={25} />} title="Platform Creation">
                 <Text c="dimmed" size="sm">
                   Creation of your own custom software platform with custom domain
                 </Text>
@@ -30,7 +30,7 @@ export default function FinxSteps() {
                 </Text>
               </Timeline.Item>
 
-              <Timeline.Item title="Your own finX" bullet={<FcTemplate size={12} />} lineVariant="dashed">
+              <Timeline.Item title="Your own finX" bullet={<FcTemplate size={25} />} lineVariant="dashed">
                 <Text c="dimmed" size="sm">
                   Ready to use platform
                 </Text>
