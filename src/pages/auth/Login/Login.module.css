@@ -1,0 +1,22 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-end; /* Aligns content to the right */
+  background-size: cover;
+  background-image: url('./login-showcase.jpg');
+}
+
+.form {
+  border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
+  min-height: 100vh;
+  width: 600px;
+  padding-top: rem(80px);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    width: 100%; /* Adjust to full width on small screens */
+  }
+}
+
+.title {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+}
