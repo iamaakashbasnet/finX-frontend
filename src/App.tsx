@@ -1,6 +1,7 @@
-import { createTheme, MantineProvider } from '@mantine/core';
-import React from 'react';
+import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
+import { createTheme, MantineProvider } from '@mantine/core';
+
 import RouteConstructor from 'routers/router';
 
 const theme = createTheme({
@@ -11,9 +12,9 @@ const theme = createTheme({
 const App = () => {
   return (
     <MantineProvider theme={theme} defaultColorScheme="light">
-      <React.Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <RouterProvider router={RouteConstructor} />
-      </React.Suspense>
+      </Suspense>
     </MantineProvider>
   );
 };

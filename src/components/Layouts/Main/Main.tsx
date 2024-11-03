@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
 
-import Footer from './components/Footer';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import styles from './Main.module.css';
 
-const Public = () => {
+export default function Main() {
   return (
     <div className={styles.layout}>
       <Header />
@@ -14,6 +14,4 @@ const Public = () => {
       <Footer />
     </div>
   );
-};
-
-export default Public;
+}

@@ -1,30 +1,9 @@
 import { Title, SimpleGrid, Text, Button, Grid, Space } from '@mantine/core';
 
+import features from './data.json';
 import classes from './FeaturesTitle.module.css';
 
-const features = [
-  {
-    title: 'Real-Time, Cloud-Based Analytics',
-    description:
-      'Access insights on any device, anywhere. finXs cloud infrastructure keeps your data secure and accessible',
-  },
-  {
-    title: 'Multi-Asset Management',
-    description: 'Seamlessly manage diverse portfolios. Optimize allocation and monitor performance with ease',
-  },
-  {
-    title: 'Compliance and Security',
-    description:
-      'Enjoy robust security and regulatory compliance. finX ensures your data is encrypted and meets global standards',
-  },
-  {
-    title: 'Tailored for You',
-    description:
-      'Whether managing client portfolios or personal investments, finX offers tools that enhance decision-making',
-  },
-];
-
-function FeaturesTitle() {
+export default function FeaturesTitle() {
   const items = features.map((feature) => (
     <div key={feature.title}>
       <Text fz="lg" mt="sm" fw={500}>
@@ -62,5 +41,3 @@ function FeaturesTitle() {
     </div>
   );
 }
-
-export default FeaturesTitle;

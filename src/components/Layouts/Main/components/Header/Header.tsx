@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Container, Group, Burger, Image, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import classes from './Header.module.css';
 
 import logo from 'assets/logo.png';
+import classes from './Header.module.css';
 
 const links = [
   { link: '/about', label: 'Features' },
@@ -11,7 +11,7 @@ const links = [
   { link: '/clients', label: 'Clients' },
 ];
 
-const Header = () => {
+export default function Header() {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
 
@@ -45,6 +45,4 @@ const Header = () => {
       </Container>
     </header>
   );
-};
-
-export default Header;
+}

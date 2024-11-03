@@ -34,7 +34,7 @@ const data = [
   },
 ];
 
-function Footer() {
+export default function Footer() {
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
       <Text<'a'>
@@ -93,5 +93,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

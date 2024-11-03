@@ -41,7 +41,7 @@ const WhoWeServe = () => {
           </Text>
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 6 }}>
-          <Demo />
+          <WhoWeServeAccordion />
         </Grid.Col>
       </Grid>
     </div>
@@ -50,8 +50,7 @@ const WhoWeServe = () => {
 
 export default WhoWeServe;
 
-function Demo() {
-  // See groceries data above
+function WhoWeServeAccordion() {
   const items = groceries.map((item) => (
     <Accordion.Item key={item.value} value={item.value} classNames={classes}>
       <Accordion.Control icon={item.emoji}>

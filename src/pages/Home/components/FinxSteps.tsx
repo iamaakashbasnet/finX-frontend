@@ -5,7 +5,7 @@ import { FcTemplate } from 'react-icons/fc';
 
 import featureTitleClasses from './FeaturesTitle/FeaturesTitle.module.css';
 
-function FinxSteps() {
+export default function FinxSteps() {
   return (
     <div className={featureTitleClasses.wrapper}>
       <Grid gutter={40}>
@@ -54,5 +54,3 @@ function FinxSteps() {
     </div>
   );
 }
-
-export default FinxSteps;
