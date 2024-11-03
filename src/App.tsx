@@ -3,6 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import { createTheme, MantineProvider } from '@mantine/core';
 
 import RouteConstructor from 'routers/router';
+import Loading from 'pages/Loading';
 
 const theme = createTheme({
   fontFamily:
@@ -12,7 +13,7 @@ const theme = createTheme({
 const App = () => {
   return (
     <MantineProvider theme={theme} defaultColorScheme="light">
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<Loading />}>
         <RouterProvider router={RouteConstructor} />
       </Suspense>
     </MantineProvider>
