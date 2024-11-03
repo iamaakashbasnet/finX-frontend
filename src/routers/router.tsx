@@ -1,14 +1,20 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 
-import HomePage from 'pages/Home';
-import Main from 'components/Layouts/Main';
+import MainLayout from 'components/Layouts/Main';
+import { Home } from './lazypages';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Main />,
-    children: [{ path: '/', element: <HomePage /> }],
-  },
-]);
+const main = [{ title: 'Home', path: '/', element: <Home /> }];
 
-export default router;
+const RouteConstructor = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<MainLayout />}>
+        {main.map((single) => (
+          <Route key={single.title} path={single.path} element={single.element} />
+        ))}
+      </Route>
+    </>
+  )
+);
+
+export default RouteConstructor;
