@@ -1,4 +1,4 @@
-import { Divider } from '@mantine/core';
+import { Center, Divider, SimpleGrid, Skeleton } from '@mantine/core';
 import { PieChart } from '@mantine/charts';
 
 import StatsGrid from './components/StatsGrid';
@@ -17,16 +17,27 @@ export default function Dashboard() {
       <StatsGrid />
       <Divider my="md" />
       <h2>Portfolio Composition</h2>
-      <PieChart
-        labelsPosition="outside"
-        labelsType="percent"
-        data={pieChartData}
-        tooltipDataSource="segment"
-        withLabelsLine
-        withLabels
-        withTooltip
-        size={250}
-      />
+      <SimpleGrid cols={{ base: 1, xs: 2 }} spacing="md">
+        <div>
+          <Skeleton height={30} mt={20} radius="sm" />
+          <Skeleton height={30} mt={20} radius="sm" />
+          <Skeleton height={30} mt={20} radius="sm" />
+          <Skeleton height={30} mt={20} radius="sm" />
+          <Skeleton height={30} mt={20} radius="sm" />
+        </div>
+        <Center>
+          <PieChart
+            labelsPosition="outside"
+            labelsType="percent"
+            data={pieChartData}
+            tooltipDataSource="segment"
+            withLabelsLine
+            withLabels
+            withTooltip
+            size={250}
+          />
+        </Center>
+      </SimpleGrid>
     </>
   );
 }
