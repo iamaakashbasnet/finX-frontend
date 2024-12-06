@@ -1,8 +1,7 @@
+import { Link } from 'react-router-dom';
 import { NavLink } from '@mantine/core';
 import { TbUsersGroup } from 'react-icons/tb';
 import { FaRegBuilding } from 'react-icons/fa';
-
-import { Link } from 'react-router-dom';
 
 const data = [
   {

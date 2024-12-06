@@ -2,8 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from '
 
 import MainLayout from 'components/Layouts/Main';
 import DashboardLayout from 'components/Layouts/Dashboard';
-import { Home, NotFound404, Login } from './lazypages';
-import Dashboard from 'pages/Dashboard';
+import { Home, NotFound404, Login, Dashboard } from './lazypages';
 
 const main = [{ title: 'Home', path: '/', element: <Home /> }];
 
