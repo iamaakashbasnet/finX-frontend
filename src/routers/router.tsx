@@ -3,6 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from '
 import MainLayout from 'components/Layouts/Main';
 import DashboardLayout from 'components/Layouts/Dashboard';
 import { Home, NotFound404, Login, Dashboard } from './lazypages';
+import PrivateRoutes from './privateroutes';
 
 const main = [{ title: 'Home', path: '/', element: <Home /> }];
 
@@ -33,10 +34,12 @@ export const SubDomainRouteConstructor = createBrowserRouter(
         <Route key={authSingle.title} path={authSingle.path} element={authSingle.element} />
       ))}
 
-      <Route path="/dashboard" element={<DashboardLayout />}>
-        {dashboard.map((dashboardSingle) => (
-          <Route key={dashboardSingle.title} path={dashboardSingle.path} element={dashboardSingle.element} />
-        ))}
+      <Route path="/" element={<DashboardLayout />}>
+        <Route element={<PrivateRoutes />}>
+          {dashboard.map((dashboardSingle) => (
+            <Route key={dashboardSingle.title} path={dashboardSingle.path} element={dashboardSingle.element} />
+          ))}
+        </Route>
       </Route>
 
       <Route path="*" element={<NotFound404 />} />
