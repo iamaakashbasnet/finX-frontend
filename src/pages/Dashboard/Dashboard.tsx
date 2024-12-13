@@ -1,7 +1,9 @@
+import { useSelector } from 'react-redux';
 import { Center, Divider, SimpleGrid, Skeleton } from '@mantine/core';
 import { PieChart } from '@mantine/charts';
 
 import StatsGrid from './components/StatsGrid';
+import { RootState } from 'state/store';
 
 const pieChartData = [
   { name: 'Commercial Banks', value: 400, color: 'indigo.6' },
@@ -11,9 +13,13 @@ const pieChartData = [
 ];
 
 export default function Dashboard() {
+  const user = useSelector((state: RootState) => state.user);
+
   return (
     <>
-      <h1>Welcome John Doe!</h1>
+      <h1>
+        Welcome {user.first_name} {user.last_name}!
+      </h1>
       <StatsGrid />
       <Divider my="md" />
       <h2>Portfolio Composition</h2>

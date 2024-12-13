@@ -14,9 +14,7 @@ export default function TopbarMenu() {
     <Menu shadow="md" width={200} arrowPosition="center" withArrow>
       <Menu.Target>
         <ActionIcon variant="transparent" radius="xl" size="xl">
-          <Avatar src="https://randomuser.me/api/portraits/men/83.jpg" radius="xl">
-            JD
-          </Avatar>
+          <Avatar src="https://randomuser.me/api/portraits/men/83.jpg" radius="xl" />
         </ActionIcon>
       </Menu.Target>
 
