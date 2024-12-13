@@ -112,7 +112,7 @@ export const loadUserData = createAsyncThunk('user/loadUserData', async () => {
 export const reAuth = createAsyncThunk('user/reAuth', async (_, thunkAPI) => {
   try {
     const res = await apiClient.post('/users/token/refresh/');
-    apiClient.defaults.headers.common['Authorization'] = `Bearer ${res.data.access as string}`;
+    apiClient.defaults.headers.common['Authorization'] = `Bearer ${res.data.at as string}`;
     thunkAPI.dispatch(loadUserData());
     return res.data;
   } catch (err) {
