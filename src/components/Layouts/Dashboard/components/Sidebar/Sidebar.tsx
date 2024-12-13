@@ -8,16 +8,16 @@ const data = [
     label: 'Clients',
     icon: <TbUsersGroup size="1rem" />,
     links: [
-      { label: 'Review Clients', path: '/review-clients' },
-      { label: 'Manage Clients', path: '/manage-clients' },
+      { label: 'General Clients', path: '/general-clients' },
+      { label: 'Pool Clients', path: '/pool-clients' },
     ],
   },
   {
     label: 'Firm',
     icon: <FaRegBuilding size="1rem" />,
     links: [
-      { label: 'Review Firm', path: '/review-firm' },
-      { label: 'Manage Firm', path: '/manage-firm' },
+      { label: 'Executives', path: '/executives' },
+      { label: 'Managers', path: '/managers' },
     ],
   },
 ];

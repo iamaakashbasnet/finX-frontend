@@ -2,14 +2,20 @@ import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from '
 
 import MainLayout from 'components/Layouts/Main';
 import DashboardLayout from 'components/Layouts/Dashboard';
-import { Home, NotFound404, Login, Dashboard } from './lazypages';
+import { Home, NotFound404, Login, Dashboard, GeneralClients, PoolClients, Executives, Managers } from './lazypages';
 import PrivateRoutes from './privateroutes';
 
 const main = [{ title: 'Home', path: '/', element: <Home /> }];
 
 const auth = [{ title: 'Login', path: '/login', element: <Login /> }];
 
-const dashboard = [{ title: 'Dashboard', path: '/dashboard', element: <Dashboard /> }];
+const dashboard = [
+  { title: 'Dashboard', path: '/dashboard', element: <Dashboard /> },
+  { title: 'General Clients', path: '/general-clients', element: <GeneralClients /> },
+  { title: 'Pool Clients', path: '/pool-clients', element: <PoolClients /> },
+  { title: 'Executives', path: '/executives', element: <Executives /> },
+  { title: 'Managers', path: '/managers', element: <Managers /> },
+];
 
 export const RouteConstructor = createBrowserRouter(
   createRoutesFromElements(
