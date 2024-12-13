@@ -50,6 +50,21 @@ const userSlice = createSlice({
       })
 
       /**
+       * Reauthentication
+       */
+      .addCase(reAuth.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(reAuth.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isAuthenticated = true;
+      })
+      .addCase(reAuth.rejected, (state) => {
+        state.isLoading = false;
+        state.isAuthenticated = false;
+      })
+
+      /**
        * Logout
        */
       .addCase(logoutAsync.pending, (state) => {
@@ -88,6 +103,18 @@ export const loadUserData = createAsyncThunk('user/loadUserData', async () => {
   try {
     const userRes = await apiClient.get<UserState>('users/request-user-data/');
     return userRes.data;
+  } catch (err) {
+    console.error('Something went wrong:', err);
+    throw err;
+  }
+});
+
+export const reAuth = createAsyncThunk('user/reAuth', async (_, thunkAPI) => {
+  try {
+    const res = await apiClient.post('/users/token/refresh/');
+    apiClient.defaults.headers.common['Authorization'] = `Bearer ${res.data.access as string}`;
+    thunkAPI.dispatch(loadUserData());
+    return res.data;
   } catch (err) {
     console.error('Something went wrong:', err);
     throw err;
