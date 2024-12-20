@@ -20,7 +20,9 @@ export default function BasicAppShell() {
           <Group>
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
             <Image src={logo} h={40} w="auto" fit="contain" />
-            <Text fw="900">{window.location.hostname.split('.')[0].toUpperCase()}</Text>
+            <Text component="a" href="dashboard/" fw="900">
+              {window.location.hostname.split('.')[0].toUpperCase()}
+            </Text>
           </Group>
           <TopbarMenu />
         </Group>
