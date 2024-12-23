@@ -2,6 +2,8 @@ import { Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { createTheme, MantineProvider } from '@mantine/core';
 import { useDispatch } from 'react-redux';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import Loading from 'pages/Loading';
 import apiClient from 'api/apiClient';
@@ -13,6 +15,8 @@ const theme = createTheme({
   fontFamily:
     "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
 });
+
+const queryClient = new QueryClient();
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -53,13 +57,16 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <MantineProvider theme={theme} defaultColorScheme="light">
-      <Suspense fallback={<Loading />}>
-        <RouterProvider
-          router={window.location.hostname.split('.').length > 1 ? SubDomainRouteConstructor : RouteConstructor}
-        />
-      </Suspense>
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider theme={theme} defaultColorScheme="light">
+        <Suspense fallback={<Loading />}>
+          <RouterProvider
+            router={window.location.hostname.split('.').length > 1 ? SubDomainRouteConstructor : RouteConstructor}
+          />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Suspense>
+      </MantineProvider>
+    </QueryClientProvider>
   );
 };
 
