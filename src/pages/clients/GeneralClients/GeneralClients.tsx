@@ -1,12 +1,24 @@
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Space, Table, Text, Modal, Paper } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { Space, Table, Text, Paper } from '@mantine/core';
 import { LuUserRoundCheck, LuUserRoundX } from 'react-icons/lu';
 
+import ClientModal from '../components/Modal';
 import { fetchGeneralClients } from './api';
 
-export default function GeneralClients() {
-  const [opened, { open, close }] = useDisclosure(false);
+const GeneralClients = () => {
+  const [opened, setOpened] = useState(false);
+  const [selectedClientId, setSelectedClientId] = useState<number | null>(null);
+
+  const open = (clientId: number) => {
+    setSelectedClientId(clientId);
+    setOpened(true);
+  };
+
+  const close = () => {
+    setOpened(false);
+    setSelectedClientId(null);
+  };
 
   const { data, isLoading } = useQuery({
     queryKey: ['fetch-general-clients'],
@@ -41,7 +53,7 @@ export default function GeneralClients() {
           </Table.Thead>
           <Table.Tbody>
             {data?.map((client) => (
-              <Table.Tr key={client.user.id} onClick={open} style={{ cursor: 'pointer' }}>
+              <Table.Tr key={client.id} onClick={() => open(client.id)} style={{ cursor: 'pointer' }}>
                 <Table.Td>
                   {client.user.first_name} {client.user.last_name}
                 </Table.Td>
@@ -55,18 +67,9 @@ export default function GeneralClients() {
         </Table>
       </Paper>
 
-      <Modal
-        opened={opened}
-        onClose={close}
-        title="Clients Details"
-        size="xl"
-        overlayProps={{
-          backgroundOpacity: 0.55,
-          blur: 3,
-        }}
-      >
-        <Text>This modal will contain a form for updating clients data</Text>
-      </Modal>
+      <ClientModal opened={opened} close={close} clientId={selectedClientId} title="General Client Details" />
     </>
   );
-}
+};
+
+export default GeneralClients;
