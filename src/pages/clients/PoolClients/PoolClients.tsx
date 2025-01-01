@@ -71,7 +71,7 @@ export default function PoolClients() {
         </Table>
       </Paper>
 
-      <ClientModal opened={opened} close={close} clientId={selectedClientId} title="General Client Details" />
+      <ClientModal opened={opened} close={close} clientId={selectedClientId} title="Pool Client Details" />
     </>
   );
 }
