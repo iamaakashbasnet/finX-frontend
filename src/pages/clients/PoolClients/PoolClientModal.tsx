@@ -1,7 +1,7 @@
 import { Modal, Text, Avatar, Badge, Space, Flex, Center } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchGeneralClientDetails } from './../../GeneralClients/api';
+import { fetchPoolClientDetails } from './api';
 
 interface ClientModalProps {
   opened: boolean;
@@ -10,10 +10,10 @@ interface ClientModalProps {
   clientId: number | null;
 }
 
-export default function ClientModal({ opened, close, title, clientId }: ClientModalProps) {
+export default function PoolClientModal({ opened, close, title, clientId }: ClientModalProps) {
   const { data, isLoading } = useQuery({
-    queryKey: ['fetch-general-client-detail'],
-    queryFn: () => fetchGeneralClientDetails(clientId),
+    queryKey: ['fetch-pool-client-detail'],
+    queryFn: () => fetchPoolClientDetails(clientId),
     enabled: opened && clientId !== null,
   });
 

@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Space, Table, Text, Paper } from '@mantine/core';
 import { LuUserRoundCheck, LuUserRoundX } from 'react-icons/lu';
 
-import ClientModal from '../components/Modal';
+import ClientModal from './GeneralClientModal';
 import { fetchGeneralClients } from './api';
 
 const GeneralClients = () => {
