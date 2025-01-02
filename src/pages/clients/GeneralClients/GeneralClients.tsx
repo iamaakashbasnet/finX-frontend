@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Space, Table, Text, Paper } from '@mantine/core';
+import { Table, Text, Paper, Button, Group } from '@mantine/core';
 import { LuUserRoundCheck, LuUserRoundX } from 'react-icons/lu';
 
 import ClientModal from './GeneralClientModal';
 import { fetchGeneralClients } from './api';
+import GeneralClientCreateModal from './GeneralClientCreateModal';
 
 const GeneralClients = () => {
   const [opened, setOpened] = useState(false);
   const [selectedClientId, setSelectedClientId] = useState<number | null>(null);
+
+  const [generalClientCreateOpen, setGeneralClientCreateOpen] = useState(false);
 
   const open = (clientId: number) => {
     setSelectedClientId(clientId);
@@ -33,7 +36,11 @@ const GeneralClients = () => {
       <Text size="sm" c="dimmed" pl="sm">
         General client's portfolio are managed separately from pool investments
       </Text>
-      <Space h="lg" />
+      <Group my="lg">
+        <Button variant="primary" onClick={() => setGeneralClientCreateOpen(true)}>
+          Add General Client
+        </Button>
+      </Group>
       {isLoading && <Text>Loading...</Text>}
       <Paper
         style={{
@@ -67,7 +74,15 @@ const GeneralClients = () => {
         </Table>
       </Paper>
 
+      {/* Client Details Modal */}
       <ClientModal opened={opened} close={close} clientId={selectedClientId} title="General Client Details" />
+
+      {/* Client Create Modal */}
+      <GeneralClientCreateModal
+        opened={generalClientCreateOpen}
+        close={() => setGeneralClientCreateOpen(false)}
+        title="Add General Client"
+      />
     </>
   );
 };

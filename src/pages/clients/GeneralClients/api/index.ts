@@ -31,3 +31,9 @@ export const fetchGeneralClientDetails = async (id: number | null): Promise<Gene
   const data = await fetchData<GeneralClientI>(`/clients/general/${id}`);
   return data;
 };
+
+export const checkUserEmailExist = async (body: { email: string }) => {
+  const data = await apiClient.post(`/users/user-with-email-check/`, body);
+  console.log(data);
+  return data;
+};
