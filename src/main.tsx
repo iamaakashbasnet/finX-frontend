@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App.tsx';
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
+import '@mantine/notifications/styles.css';
 
 import './index.css';
 import { store } from 'state/store.ts';

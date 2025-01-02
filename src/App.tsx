@@ -1,6 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { createTheme, MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import { useDispatch } from 'react-redux';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
@@ -59,11 +60,12 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider theme={theme} defaultColorScheme="light">
+        <Notifications />
         <Suspense fallback={<Loading />}>
           <RouterProvider
             router={window.location.hostname.split('.').length > 1 ? SubDomainRouteConstructor : RouteConstructor}
           />
-          <ReactQueryDevtools initialIsOpen={false} />
+          <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
         </Suspense>
       </MantineProvider>
     </QueryClientProvider>

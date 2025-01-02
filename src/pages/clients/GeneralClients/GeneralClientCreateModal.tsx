@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Anchor, Button, Loader, Modal, NumberInput, TextInput, useMantineTheme } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { CiAt } from 'react-icons/ci';
 import { LuUserRoundCheck } from 'react-icons/lu';
 
 import { checkUserEmailExist, createGeneralClient } from './api';
+import { notifications } from '@mantine/notifications';
 
 interface ClientModalProps {
   opened: boolean;
@@ -15,6 +16,7 @@ interface ClientModalProps {
 
 export default function GeneralClientCreateModal({ opened, close, title }: ClientModalProps) {
   const theme = useMantineTheme();
+  const queryClient = useQueryClient();
   const [email, setEmail] = useState('');
 
   const form = useForm({
@@ -36,6 +38,14 @@ export default function GeneralClientCreateModal({ opened, close, title }: Clien
 
   const { mutateAsync: createClientMutation } = useMutation({
     mutationFn: (body: { user_email: string; payments: number }) => createGeneralClient(body),
+    onSuccess: () => {
+      notifications.show({
+        title: 'Success',
+        message: 'General client successfully created.',
+      });
+      close();
+      queryClient.invalidateQueries({ queryKey: ['fetch-general-clients'] });
+    },
   });
 
   useEffect(() => {
