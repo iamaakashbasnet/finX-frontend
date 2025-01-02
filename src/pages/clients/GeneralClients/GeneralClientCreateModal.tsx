@@ -5,7 +5,7 @@ import { useForm } from '@mantine/form';
 import { CiAt } from 'react-icons/ci';
 import { LuUserRoundCheck } from 'react-icons/lu';
 
-import { checkUserEmailExist } from './api';
+import { checkUserEmailExist, createGeneralClient } from './api';
 
 interface ClientModalProps {
   opened: boolean;
@@ -20,8 +20,8 @@ export default function GeneralClientCreateModal({ opened, close, title }: Clien
   const form = useForm({
     mode: 'uncontrolled',
     initialValues: {
-      email: email,
-      payment: 0.0,
+      user_email: email,
+      payments: 0.0,
     },
   });
 
@@ -30,18 +30,22 @@ export default function GeneralClientCreateModal({ opened, close, title }: Clien
     return emailRegex.test(email);
   };
 
-  const { mutateAsync, status } = useMutation({
+  const { mutateAsync: checkUserEmailExistMutation, status: checkUserEmailExistStatus } = useMutation({
     mutationFn: (email: string) => checkUserEmailExist({ email: email }),
+  });
+
+  const { mutateAsync: createClientMutation } = useMutation({
+    mutationFn: (body: { user_email: string; payments: number }) => createGeneralClient(body),
   });
 
   useEffect(() => {
     const checkEmail = async () => {
       if (isValidEmail(email)) {
-        await mutateAsync(email);
+        await checkUserEmailExistMutation(email);
       }
     };
     checkEmail();
-  }, [email, mutateAsync]);
+  }, [email, checkUserEmailExistMutation]);
 
   return (
     <Modal.Root opened={opened} onClose={close} size="lg">
@@ -52,7 +56,7 @@ export default function GeneralClientCreateModal({ opened, close, title }: Clien
           <Modal.CloseButton />
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={form.onSubmit(async (values) => console.log(values))}>
+          <form onSubmit={form.onSubmit(async (values) => await createClientMutation(values))}>
             <div>
               <TextInput
                 label="Email address"
@@ -61,18 +65,20 @@ export default function GeneralClientCreateModal({ opened, close, title }: Clien
                 value={email}
                 onChange={(event) => {
                   setEmail(event.currentTarget.value);
-                  form.getInputProps('email').onChange(event); // Trigger form change
+                  form.getInputProps('user_email').onChange(event); // Trigger form change
                 }}
                 rightSection={
                   isValidEmail(email) &&
-                  (status === 'pending' ? (
+                  (checkUserEmailExistStatus === 'pending' ? (
                     <Loader color="blue" size="sm" />
                   ) : (
-                    status === 'success' && <LuUserRoundCheck color={theme.colors.blue[6]} size={20} />
+                    checkUserEmailExistStatus === 'success' && (
+                      <LuUserRoundCheck color={theme.colors.blue[6]} size={20} />
+                    )
                   ))
                 }
                 error={
-                  status === 'error' && isValidEmail(email) ? (
+                  checkUserEmailExistStatus === 'error' && isValidEmail(email) ? (
                     <>
                       User with email doesn't exist{' '}
                       <Anchor size="xs" underline="always">
@@ -81,7 +87,7 @@ export default function GeneralClientCreateModal({ opened, close, title }: Clien
                     </>
                   ) : null
                 }
-                key={form.key('email')}
+                key={form.key('user_email')}
               />
               <br />
             </div>
@@ -92,11 +98,17 @@ export default function GeneralClientCreateModal({ opened, close, title }: Clien
                 prefix="Rs. "
                 defaultValue={100}
                 mb="md"
-                key={form.key('payment')}
-                {...form.getInputProps('payment')}
+                key={form.key('payments')}
+                {...form.getInputProps('payments')}
               />
             </div>
-            <Button type="submit" fullWidth mt="xl" size="md" disabled={status === 'error' || status === 'pending'}>
+            <Button
+              type="submit"
+              fullWidth
+              mt="xl"
+              size="md"
+              disabled={checkUserEmailExistStatus === 'error' || checkUserEmailExistStatus === 'pending'}
+            >
               Add General Client
             </Button>
           </form>

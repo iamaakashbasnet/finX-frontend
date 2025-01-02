@@ -38,7 +38,8 @@ export const checkUserEmailExist = async (body: { email: string }) => {
   return data;
 };
 
-export const createGeneralClient = async (body: { email: string; payment: number }) => {
+export const createGeneralClient = async (body: { user_email: string; payments: number }) => {
   const data = await apiClient.post(`/clients/general/`, body);
+  console.log(data);
   return data;
 };
