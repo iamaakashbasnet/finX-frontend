@@ -43,3 +43,9 @@ export const createGeneralClient = async (body: { user_email: string; payments: 
   console.log(data);
   return data;
 };
+
+export const createUserWithEmail = async (body: { email: string }) => {
+  const data = await apiClient.post(`/users/create-user-with-email-only/`, body);
+  console.log(data);
+  return data;
+};

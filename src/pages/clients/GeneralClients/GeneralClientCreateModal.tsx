@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Anchor, Button, Loader, Modal, NumberInput, TextInput, useMantineTheme } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { notifications } from '@mantine/notifications';
 import { CiAt } from 'react-icons/ci';
 import { LuUserRoundCheck } from 'react-icons/lu';
 
-import { checkUserEmailExist, createGeneralClient } from './api';
-import { notifications } from '@mantine/notifications';
+import { checkUserEmailExist, createGeneralClient, createUserWithEmail } from './api';
 
 interface ClientModalProps {
   opened: boolean;
@@ -91,7 +91,7 @@ export default function GeneralClientCreateModal({ opened, close, title }: Clien
                   checkUserEmailExistStatus === 'error' && isValidEmail(email) ? (
                     <>
                       User with email doesn't exist{' '}
-                      <Anchor size="xs" underline="always">
+                      <Anchor size="xs" underline="always" onClick={() => createUserWithEmail({ email: email })}>
                         send email?
                       </Anchor>
                     </>
